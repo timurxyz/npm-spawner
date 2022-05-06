@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Node 16 but es6 + ESM + d.ts + include index.js + strict types + see emitted",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "src",
+    "outDir": "./lib",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "es6",
+    // "types": ["node"],
+    "declaration": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "listEmittedFiles": true,
+    "pretty": true,
+  },
+  "exclude": [
+    "node_modules",
+    "**/lib"
+  ],
+  "include": [
+    "src/**/*",
+    "README.md"
+  ],
+}
