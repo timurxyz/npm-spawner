@@ -1,6 +1,6 @@
 {
   "name": "npm-spawner",
-  "version": "1.0.4.b",
+  "version": "1.0.4-2",
   "description": "Little sugar around node.proc.spawn to load npm/yarn/pnpm with commands/scripts programmatically [ts/js]",
   "license": "MIT",
   "type": "module",
@@ -9,6 +9,7 @@
   "exports": "./lib/index.js",
   "scripts": {
     "compile": "tsc --build",
+    "publish:npm": "publish --access public",
     "publish:local": "yalc push"
   },
   "devDependencies": {
@@ -18,12 +19,7 @@
   "files": [
     "lib/**"
   ],
-  "keywords": [
-    "npm",
-    "api",
-    "run",
-    "yarn"
-  ],
+  "keywords": ["npm","api","run","yarn"],
   "author": {
     "name": "timur x",
     "url": "https://github.com/timurxyz"
