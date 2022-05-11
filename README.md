@@ -104,7 +104,7 @@ type SpawnNodeChildOptions = {
 }
 
 type NpmSpawnerOptions = SpawnNodeChildOptions & {
-    npm?: string, // let's you specify 'yarn'
+    npm?: string, // lets you specify 'yarn'
 }
 ```
 
