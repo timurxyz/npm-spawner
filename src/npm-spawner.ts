@@ -1,7 +1,7 @@
 import {spawnNodeChild, SpawnNodeChildOptions, SpawnNodeChildReturnT} from './spawn-node-child.js';
 
 export type NpmSpawnerOptions = SpawnNodeChildOptions & {
-  npm?: string,
+  npm?: string, // let's you specify 'yarn'
 }
 
 export async function npmSpawner (

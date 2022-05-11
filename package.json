@@ -1,6 +1,6 @@
 {
   "name": "npm-spawner",
-  "version": "1.0.5-e",
+  "version": "1.0.5-f",
   "description": "This async TS/JS code is to programmatically execute/fork external/shell commands and npm/yarn scripts from Node.",
   "license": "MIT",
   "type": "module",

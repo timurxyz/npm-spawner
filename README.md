@@ -102,6 +102,10 @@ type SpawnNodeChildOptions = {
   suppressShellWarning?: boolean,  // mind not to make it vulnerable
   getSpawnedProc?: (childProc: ChildProcess) =>void
 }
+
+type NpmSpawnerOptions = SpawnNodeChildOptions & {
+    npm?: string, // let's you specify 'yarn'
+}
 ```
 
 > "If the ``shell`` option is enabled, do not pass unsanitized user input to this function. Any input containing shell metacharacters may be used to trigger arbitrary command execution."

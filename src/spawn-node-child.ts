@@ -28,6 +28,7 @@ export type SpawnNodeChildOptions = {
   // 'inherit' is the forced setting for stdio (bound to process.std*), this resets the behaviour to undefined
   suppressShellWarning?: boolean,  // mind not to make it vulnerable
   getSpawnedProc?: (childProc: ChildProcess) =>void
+  // the ChildProcess event emitter returned by the child_process.spawn
 }
 
 // Consult also: https://nodejs.org/api/child_process.html#class-childprocess
