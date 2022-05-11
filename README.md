@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/npm-spawner.svg)](https://badge.fury.io/js/npm-spawner)
 
-This async TS/JS code is to programmatically execute/fork external/shell commands and npm/yarn scripts from Node. The major assumed case is repo management, running npm/yarn/pnpm scripts, when your Node app/script launches a script from ``package.json`` like ``yarn deploy:moduleX`` -- hence the ``npm-spawner`` package name. Also it provides a general mean (``spawnNodeChild``) to execute anything the async (standard version) ``spawn`` method of the Node's ``child_process`` can. In a callback/event handler/hook fashion it exposes the events, the ``ChildProcess`` event emitter itself and returns a promise to the final status of the execution (a less detailed one than the spawnSync version would). 
+This async TS/JS code is to programmatically execute/fork external/shell commands and npm/yarn scripts from Node. The major assumed case is smart repo maintenance, running npm/yarn/pnpm scripts, when your Node app/script launches a script from ``package.json`` like ``yarn deploy:moduleX`` -- hence the ``npm-spawner`` package name. Also it provides a general mean (``spawnNodeChild``) to execute anything the async (standard version) ``spawn`` method of the Node's ``child_process`` can. In a callback/event handler/hook fashion it exposes the events, the ``ChildProcess`` event emitter itself and returns a promise to the final status of the execution (a less detailed one than the spawnSync version would). 
 
 > In Node ``spawn`` is the variant of ``exec`` that one would use for external processes emitting stuff to stdio. This by default does not create a shell so is less vulnerable.
 
@@ -108,3 +108,13 @@ type SpawnNodeChildOptions = {
 > 
 Consult also: https://nodejs.org/api/child_process.html#class-childprocess
 
+### Security
+
+* This module uses no dependencies except Node itself. The small code is simple to review.
+* The functionality it opens up may have serious security implications so implement carefully and submit for code review by a competent person (eg. security engineer/champion or pentester).
+* If the use case remains within the frame of local CLI then exposing utilities/scripts via this code will not extend the existing risks (as compared to the user launching codes via npm/node directly).
+* If this code bridges access to the machine hosted scripts (running with local user privileges) from a webinterface available from the outside then containment (jailing), strict user authentication and security code review is necessary.
+
+### Feedback
+* issue submission
+* twitter: timurxyz

@@ -16,7 +16,6 @@
     "pretty": true,
   },
   "include": [
-    "src/**/*",
-    "README.md"
+    "src/**/*"
   ],
 }

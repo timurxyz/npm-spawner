@@ -1,7 +1,7 @@
 {
   "name": "npm-spawner",
-  "version": "1.0.5-d",
-  "description": "Little sugar around node.proc.spawn to load npm/yarn/pnpm with commands/scripts programmatically [ts/js]",
+  "version": "1.0.5-e",
+  "description": "This async TS/JS code is to programmatically execute/fork external/shell commands and npm/yarn scripts from Node.",
   "license": "MIT",
   "type": "module",
   "module": "lib/index.js",
@@ -19,10 +19,19 @@
   "files": [
     "lib/**"
   ],
-  "keywords": ["npm","api","run","yarn"],
+  "keywords": [
+    "spawn",
+    "ChildProcess",
+    "node",
+    "npm",
+    "api",
+    "run",
+    "yarn"
+  ],
   "author": {
     "name": "timur x",
-    "url": "https://github.com/timurxyz"
+    "url": "https://github.com/timurxyz",
+    "twitter": "https://twitter.com/timurxyz"
   },
   "bugs": {
     "url": "https://github.com/timurxyz/npm-spawner/issues"
