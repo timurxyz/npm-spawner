@@ -12,8 +12,8 @@ export async function npmSpawner (
 {
 
   return spawnNodeChild(
-      options?.npm || "npm",
-      args,
-      options
-    );
+    options?.npm || "npm",
+    args,
+    options
+  );
 }

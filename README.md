@@ -44,7 +44,7 @@ const {code:testResult} = await spawnNodeChild(
     }
 );
 console.log("Package.json:",testResult===0? "exists.":"is missing or we otherwise failed to test it.");
-
+// the sane solution should have been simply to call fs.existsSync(projectPackageJsonPath) :))
 ```
 
 ### Explainer 
@@ -66,12 +66,12 @@ async function spawnNodeChild (
   command: string,
   args: string|string[],  // args as an array of strings as per the spawn signature, or a string with space separated args
   options?: SpawnNodeChildOptions
-): Promise<SpawnNodeChildReturnT>
+): Promise<SpawnNodeChildReturnT> {}
 
 async function npmSpawner (
   args: string|string[],  // args as an array of strings as per the spawn signature, or a string with space separated args
   options?: NpmSpawnerOptions
-): Promise<SpawnNodeChildReturnT>
+): Promise<SpawnNodeChildReturnT> {}
 
 type SpawnNodeChildReturnT = {
   code: number|null,
@@ -118,6 +118,12 @@ Consult also: https://nodejs.org/api/child_process.html#class-childprocess
 * The functionality it opens up may have serious security implications so implement carefully and submit for code review by a competent person (eg. security engineer/champion or pentester).
 * If the use case remains within the frame of local CLI then exposing utilities/scripts via this code will not extend the existing risks (as compared to the user launching codes via npm/node directly).
 * If this code bridges access to the machine hosted scripts (running with local user privileges) from a webinterface available from the outside then containment (jailing), strict user authentication and security code review is necessary.
+
+### Useful stuff
+* ``import * as path from 'path';``
+* ``import * as fs from 'graceful-fs';``
+* ``import yargs from 'yargs';``
+* ``import {concurrently} from 'concurrently';``
 
 ### Feedback
 * issue submission

@@ -10,9 +10,9 @@ export type SpawnNodeChildOptions = {
   cwd?: string,  // extracted for convenience, injected to nodeSpawnOptions.cwd
   nodeSpawnOptions?: SpawnOptionsWithoutStdio,  // the standard child_process.spawnSync options
   onClose?: (
-      code: SpawnNodeChildReturnT['code'],
-      problemCollected?: SpawnNodeChildReturnT['problemCollected'],
-      signal?: SpawnNodeChildReturnT['signal']
+    code: SpawnNodeChildReturnT['code'],
+    problemCollected?: SpawnNodeChildReturnT['problemCollected'],
+    signal?: SpawnNodeChildReturnT['signal']
   ) =>void,
   // the hook on the 'close' event which will fire anyway after error/exit/problem (except the exception probably),
   // use to finalize the run and mind not to double handle events
