@@ -53,13 +53,12 @@ console.log("Package.json:",testResult===0? "exists.":"is missing or we otherwis
 * When not awaiting, the execution will take the async/concurrent flow. And the ``ChildProcess`` event emitter is available from the ``getSpawnedProc`` callback (the emitter otherwise returned by the ``child_process.spawn``).
 * Unlike with pure ``spawn`` you can provide args as a space-separated single string.
 * The resolved returned shape holds the 'exit' ``code`` (returned by the ``close`` event), the signal if terminated and the error/problem code if previously exit or error events dropped one.
-* Note: this package delivers a pure ``ESM`` module.
+* Note: this package primarily delivers a pure ``ESM`` module. 
+* For ``CommonJS`` version you need to ``import { npmSpawner, spawnNodeChild, SpawnNodeChildReturnT } from 'npm-spawner/lib/index-cjs.cjs';``. 
 * By default ``stdin``,``stdout`` and ``stderr`` are inherited from the calling Node process.
 * ``shell`` is by default set to false, and if enabled one needs to set an additional flag to mute a warning reminding us about the vulnarable nature of this choice.
 
 ### Shapes
-
-
 
 ```typescript
 async function spawnNodeChild (

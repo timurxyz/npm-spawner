@@ -1,19 +1,27 @@
 {
   "name": "npm-spawner",
-  "version": "1.0.5-i",
+  "version": "1.0.6-a",
   "description": "This async TS/JS code is to programmatically execute/fork external/shell commands and npm/yarn scripts from Node.",
   "license": "MIT",
   "type": "module",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
-  "exports": "./lib/index.js",
+  "export": {
+    "import": "./lib/index.js",
+    "require": "./lib/index-cjs.cjs",
+    "default": "./lib/index.js"
+  },
   "scripts": {
-    "build": "tsc --build",
+    "build:esm": "tsc --build",
+    "build:cjs:d": "tsc --emitDeclarationOnly --outFile lib/index-cjs.cjs --esModuleInterop --module commonjs",
+    "build:cjs": "esbuild ./src/index.ts --bundle --outfile=./lib/index-cjs.cjs --platform=node && npm run build:cjs:d",
+    "build": "npm run build:esm && npm run build:cjs",
     "publish:npm": "npm publish --access public",
     "publish:local": "yalc push"
   },
   "devDependencies": {
     "@types/node": "latest",
+    "esbuild": "latest",
     "typescript": "latest"
   },
   "files": [

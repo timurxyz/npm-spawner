@@ -1,4 +1,4 @@
-import {spawnNodeChild, SpawnNodeChildOptions, SpawnNodeChildReturnT} from './spawn-node-child.js';
+import { spawnNodeChild, SpawnNodeChildOptions, SpawnNodeChildReturnT } from './spawn-node-child.js';
 
 export type NpmSpawnerOptions = SpawnNodeChildOptions & {
   npm?: string, // lets you specify 'yarn'
