@@ -54,9 +54,10 @@ console.log("Package.json:",testResult===0? "exists.":"is missing or we otherwis
 * Unlike with pure ``spawn`` you can provide args as a space-separated single string.
 * The resolved returned shape holds the 'exit' ``code`` (returned by the ``close`` event), the signal if terminated and the error/problem code if previously exit or error events dropped one.
 * Note: this package primarily delivers a pure ``ESM`` module. 
-* For ``CommonJS`` version you need to ``import { npmSpawner, spawnNodeChild, SpawnNodeChildReturnT } from 'npm-spawner/lib/index-cjs.cjs';``. 
+* * For apps ran by ``ts-node`` you may need to ``import { npmSpawner, spawnNodeChild, SpawnNodeChildReturnT } from 'npm-spawner/lib/index.js'``.
+* For the ``CommonJS`` version you need to ``import { npmSpawner, spawnNodeChild, SpawnNodeChildReturnT } from 'npm-spawner/lib/index-cjs.cjs'`` or require. 
 * By default ``stdin``,``stdout`` and ``stderr`` are inherited from the calling Node process.
-* ``shell`` is by default set to false, and if enabled one needs to set an additional flag to mute a warning reminding us about the vulnarable nature of this choice.
+* ``shell`` is by default set to false, and if enabled one needs to set an additional flag to mute a warning reminding us about the vulnerable nature of this choice.
 
 ### Shapes
 
@@ -116,7 +117,12 @@ Consult also: https://nodejs.org/api/child_process.html#class-childprocess
 * This module uses no dependencies except Node itself. The small code is simple to review.
 * The functionality it opens up may have serious security implications so implement carefully and submit for code review by a competent person (eg. security engineer/champion or pentester).
 * If the use case remains within the frame of local CLI then exposing utilities/scripts via this code will not extend the existing risks (as compared to the user launching codes via npm/node directly).
-* If this code bridges access to the machine hosted scripts (running with local user privileges) from a webinterface available from the outside then containment (jailing), strict user authentication and security code review is necessary.
+* If this code bridges access to machine hosted scripts (running with local user privileges) from a webinterface available remotely then containment (jailing), strict user authentication, access controls and continuous security code-review is necessary.
+
+### Edge cases
+* When used in an ``CommonJS`` app/module do import from ``'npm-spawner/lib/index-cjs.cjs'``. See the corresponding point in the Explainer section above. ``index-cjs.cjs`` is a self-contained bundle (see kitchen details in the ``package.json``), so this supposedly prevents the 'dual package hazard', see also https://nodejs.org/api/packages.html#dual-package-hazard.
+* May tsc be complaining like ``Could not find a declaration file for module 'npm-spawner/lib/index-cjs.cjs'.`` then it's likely that your code tries to load cjs in esm mode.
+* May ``esbuild`` drop a warning ``Top-level "this" will be replaced with undefined since this file is an ECMAScript module`` try using ``--define:this=globalThis`` option like ``esbuild ./src/app.ts --bundle --outfile=./bin/app.js --platform=node --format=esm --define:this=globalThis``.
 
 ### Useful stuff
 * ``import * as path from 'path';``
