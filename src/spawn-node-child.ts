@@ -1,4 +1,4 @@
-import { ChildProcess, spawn, SpawnOptionsWithoutStdio } from 'child_process';
+import { ChildProcess, spawn, SpawnOptionsWithoutStdio } from 'node:child_process';
 
 export type SpawnNodeChildReturnT = {
   code: number|null,

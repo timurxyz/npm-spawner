@@ -53,9 +53,14 @@ console.log("Package.json:",testResult===0? "exists.":"is missing or we otherwis
 * When not awaiting, the execution will take the async/concurrent flow. And the ``ChildProcess`` event emitter is available from the ``getSpawnedProc`` callback (the emitter otherwise returned by the ``child_process.spawn``).
 * Unlike with pure ``spawn`` you can provide args as a space-separated single string.
 * The resolved returned shape holds the 'exit' ``code`` (returned by the ``close`` event), the signal if terminated and the error/problem code if previously exit or error events dropped one.
-* Note: this package primarily delivers a pure ``ESM`` module. 
-* * For apps ran by ``ts-node`` you may need to ``import { npmSpawner, spawnNodeChild, SpawnNodeChildReturnT } from 'npm-spawner/lib/index.js'``.
-* For the ``CommonJS`` version you need to ``import { npmSpawner, spawnNodeChild, SpawnNodeChildReturnT } from 'npm-spawner/lib/index-cjs.cjs'`` or require. 
+* Note: this package *primarily* delivers a pure ``ESM`` module.
+  * For going ESM with your own app/module you may consult Joshua's 'ES Modules in NodeJS' cheatsheet at https://docs.joshuatz.com/cheatsheets/node-and-npm/node-esm/
+* When ran within a ``ts-node`` scenario: 
+  * May need to import ``npm-spawner/index.js`` (try importing from ``npm-spawner`` first). 
+  * ``node --loader ts-node/esm ./your-app.ts``
+* The alternative ``CommonJS`` usage: 
+  * Import or require from the ``npm-spawner/cjs/index.js`` bundle. 
+  * This bundling supposedly prevents the 'dual package hazard'.
 * By default ``stdin``,``stdout`` and ``stderr`` are inherited from the calling Node process.
 * ``shell`` is by default set to false, and if enabled one needs to set an additional flag to mute a warning reminding us about the vulnerable nature of this choice.
 
@@ -119,16 +124,16 @@ Consult also: https://nodejs.org/api/child_process.html#class-childprocess
 * If the use case remains within the frame of local CLI then exposing utilities/scripts via this code will not extend the existing risks (as compared to the user launching codes via npm/node directly).
 * If this code bridges access to machine hosted scripts (running with local user privileges) from a webinterface available remotely then containment (jailing), strict user authentication, access controls and continuous security code-review is necessary.
 
-### Edge cases
-* When used in an ``CommonJS`` app/module do import from ``'npm-spawner/lib/index-cjs.cjs'``. See the corresponding point in the Explainer section above. ``index-cjs.cjs`` is a self-contained bundle (see kitchen details in the ``package.json``), so this supposedly prevents the 'dual package hazard', see also https://nodejs.org/api/packages.html#dual-package-hazard.
-* May tsc be complaining like ``Could not find a declaration file for module 'npm-spawner/lib/index-cjs.cjs'.`` then it's likely that your code tries to load cjs in esm mode.
+### Troubleshooting
+* For the ESM, TS-Node and CommonJs issues see the Explainer section above.
 * May ``esbuild`` drop a warning ``Top-level "this" will be replaced with undefined since this file is an ECMAScript module`` try using ``--define:this=globalThis`` option like ``esbuild ./src/app.ts --bundle --outfile=./bin/app.js --platform=node --format=esm --define:this=globalThis``.
 
 ### Useful stuff
-* ``import * as path from 'path';``
-* ``import * as fs from 'graceful-fs';``
-* ``import yargs from 'yargs';``
-* ``import {concurrently} from 'concurrently';``
+* ``import * as path from 'node:path'``
+* ``import * as fs from 'graceful-fs'``
+* ``import chalk from 'chalk'``
+* ``import {concurrently} from 'concurrently'``
+* ``import * as oclif from '@oclif/core'``
 
 ### Feedback
 * issue submission
