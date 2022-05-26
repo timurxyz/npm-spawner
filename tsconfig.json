@@ -1,16 +1,16 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Node 16 but es6, ESM",
+  "display": "Node 16+, ES2020, ESM",
   "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": "./src",
-    "outDir": "./lib",
     "module": "nodenext",
-    "target": "es6",
+    "target": "es2020",
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "listEmittedFiles": true,
     "pretty": true,
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./lib"
   },
   "include": [
     "src/**/*"
